@@ -159,42 +159,161 @@ body {
   to { opacity: 1; }
 }
 
-/* Main Screen Graphic Display */
-.scene-viewport {
-  position: relative;
+/* Viewport and Map Layout split */
+.viewport-container {
+  display: flex;
   width: 100%;
-  aspect-ratio: 16/9;
+  border-bottom: 2px solid #222;
+  height: 380px; /* fixed height for balanced layout */
+}
+
+.scene-viewport {
+  flex-grow: 1;
+  height: 100%;
+  position: relative;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   image-rendering: pixelated;
-  border-bottom: 2px solid #222;
   transition: background-image 0.5s ease-in-out;
 }
 
-/* Animated Character Overlay - Roger Wilco */
-.character-sprite {
+/* GPS Minimap Panel */
+.minimap-panel {
+  width: 220px;
+  background-color: #0b0d0b;
+  border-left: 2px solid #222;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  color: var(--crt-green);
+  text-shadow: 0 0 2px var(--lcd-glow);
+}
+
+.minimap-title {
+  font-family: var(--font-display);
+  font-size: 10px;
+  color: var(--crt-amber);
+  margin-bottom: 12px;
+  text-align: center;
+  border-bottom: 1px solid #336633;
+  padding-bottom: 4px;
+}
+
+.minimap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.minimap-node {
+  padding: 6px 10px;
+  border: 1px solid #224422;
+  border-radius: 4px;
+  font-size: 13px;
+  text-align: center;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.minimap-node.active {
+  border-color: var(--crt-green);
+  color: #fff;
+  background-color: rgba(51, 255, 51, 0.15);
+  box-shadow: 0 0 8px var(--lcd-glow);
+  font-weight: bold;
+}
+
+.minimap-node.next-hint {
+  border-style: dotted;
+  border-color: #447744;
+  color: #669966;
+}
+
+.minimap-arrow {
+  text-align: center;
+  color: #224422;
+  font-size: 10px;
+  margin: 1px 0;
+}
+
+/* Custom Large Character Sprite with user face */
+.character-sprite-container {
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 64px;
-  height: 96px;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 24" width="64" height="96" style="image-rendering:pixelated;"><rect x="6" y="1" width="4" height="4" fill="%23f7d1a1"/><rect x="7" y="2" width="2" height="2" fill="%23000"/><rect x="5" y="5" width="6" height="8" fill="%2322d3ee"/><rect x="4" y="5" width="8" height="2" fill="%231e3a8a"/><rect x="6" y="13" width="4" height="6" fill="%231e40af"/><rect x="5" y="19" width="2" height="4" fill="%230f172a"/><rect x="9" y="19" width="2" height="4" fill="%230f172a"/></svg>');
+  width: 110px;
+  height: 190px;
+  transition: all 1s ease-in-out;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.6));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.character-sprite-container.walking {
+  animation: walk-bob-large 0.4s infinite alternate;
+}
+
+@keyframes walk-bob-large {
+  from { bottom: 10px; }
+  to { bottom: 16px; }
+}
+
+.character-body {
+  width: 110px;
+  height: 140px;
+  margin-top: -10px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 96" width="110" height="140" style="image-rendering:pixelated;"><rect x="22" y="4" width="20" height="6" fill="%23cbd5e1" rx="2" /><rect x="24" y="6" width="16" height="4" fill="%2364748b" /><rect x="18" y="10" width="28" height="34" fill="%23e2e8f0" rx="4" /><rect x="24" y="16" width="16" height="8" fill="%231e293b" rx="1" /><rect x="26" y="18" width="4" height="4" fill="%23ef4444" /><rect x="31" y="18" width="4" height="4" fill="%233b82f6" /><rect x="36" y="18" width="2" height="4" fill="%23eab308" /><rect x="16" y="40" width="32" height="6" fill="%23475569" /><rect x="28" y="39" width="8" height="8" fill="%23eab308" rx="1" /><rect x="10" y="10" width="8" height="28" fill="%23cbd5e1" rx="2" /><rect x="10" y="10" width="8" height="6" fill="%233b82f6" /><rect x="8" y="34" width="10" height="8" fill="%23475569" rx="1" /><rect x="46" y="10" width="8" height="28" fill="%23cbd5e1" rx="2" /><rect x="46" y="10" width="8" height="6" fill="%233b82f6" /><rect x="46" y="34" width="10" height="8" fill="%23475569" rx="1" /><rect x="18" y="46" width="11" height="36" fill="%23cbd5e1" rx="2" /><rect x="35" y="46" width="11" height="36" fill="%23cbd5e1" rx="2" /><rect x="18" y="60" width="11" height="6" fill="%2364748b" /><rect x="35" y="60" width="11" height="6" fill="%2364748b" /><rect x="15" y="78" width="14" height="12" fill="%23334155" rx="3" /><rect x="35" y="78" width="14" height="12" fill="%23334155" rx="3" /><rect x="14" y="86" width="16" height="4" fill="%231e293b" /><rect x="34" y="86" width="16" height="4" fill="%231e293b" /></svg>');
   background-size: contain;
   background-repeat: no-repeat;
   image-rendering: pixelated;
-  transition: all 1s ease-in-out;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+  z-index: 1;
 }
 
-.character-sprite.walking {
-  animation: walk-bob 0.5s infinite alternate;
+.character-helmet {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(17, 24, 39, 0.95);
+  border: 4px solid #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5), inset 0 0 12px rgba(255,255,255,0.2);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 }
 
-@keyframes walk-bob {
-  from { bottom: 20px; }
-  to { bottom: 24px; }
+/* Visor Glass Reflection Overlay */
+.character-helmet::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 45%, transparent 46%, transparent 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.roger-custom-face {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+  filter: contrast(1.25) brightness(0.95) saturate(1.15) hue-rotate(-5deg);
+  opacity: 0.88;
 }
 
 /* Hazard/Effect overlays */

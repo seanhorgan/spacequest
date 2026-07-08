@@ -17,7 +17,7 @@ const ROOMS = {
   // --- ACT 1: THE ARCADA ---
   closet: {
     name: 'Broom Closet',
-    image: '/images/arcada.jpg',
+    image: '/images/closet.jpg',
     description: 'You are in a dark broom closet. Mops and dusty shelves line the walls. To the west is the main corridor. You are temporarily safe here.',
     exits: { west: 'hallway_west' },
     actions: ['Look Shelf', 'Look Bucket', 'Go West'],
@@ -38,21 +38,21 @@ const ROOMS = {
   },
   archive: {
     name: 'Data Archive',
-    image: '/images/arcada.jpg',
+    image: '/images/archive.jpg',
     description: 'Computer terminals line this room. A wounded scientist lies on the floor gasping for air. A door leads south back to the hallway.',
     exits: { south: 'hallway_east' },
     actions: ['Talk Scientist', 'Look Console', 'Get Cartridge', 'Go South'],
   },
   airlock_room: {
     name: 'Spacesuit Chamber',
-    image: '/images/arcada.jpg',
+    image: '/images/airlock_room.jpg',
     description: 'This room houses the main airlock and safety lockers. To the north is the hallway, and south is the Escape Pod Bay.',
     exits: { north: 'hallway_west', south: 'pod_bay' },
     actions: ['Open Closet', 'Get Suit', 'Get Translator', 'Go South', 'Go North'],
   },
   pod_bay: {
     name: 'Escape Pod Bay',
-    image: '/images/arcada.jpg',
+    image: '/images/pod_bay.jpg',
     description: 'A heavy pressure door locks access to the Escape Pod. A keycard reader console sits beside the hatch.',
     exits: { north: 'airlock_room' },
     actions: ['Use Keycard', 'Enter Pod', 'Launch Pod', 'Go North'],
@@ -61,35 +61,35 @@ const ROOMS = {
   // --- ACT 2: PLANET KERONA ---
   crash_site: {
     name: 'Kerona Crash Site',
-    image: '/images/kerona.jpg',
+    image: '/images/crash_site.jpg',
     description: 'Your escape pod has crash-landed and is now a smoking wreckage. Red sands stretch to the horizon. A canyon path leads east.',
     exits: { east: 'desert_path' },
     actions: ['Search Pod', 'Open Kit', 'Get Glass', 'Go East'],
   },
   desert_path: {
     name: 'Desert Canyon',
-    image: '/images/kerona.jpg',
+    image: '/images/desert_path.jpg',
     description: 'A rocky desert path. High above, a massive boulder sits precariously on the canyon rim. To the east are dark caves.',
     exits: { west: 'crash_site', east: 'caves' },
     actions: ['Look Boulder', 'Push Boulder', 'Go East', 'Go West'],
   },
   caves: {
     name: 'Laser Caves',
-    image: '/images/kerona.jpg',
+    image: '/images/caves.jpg',
     description: 'You enter a dark cavern. A grid of glowing red laser security beams blocks the way south. East is back to the desert canyon.',
     exits: { west: 'desert_path', south: 'orat_cave' },
     actions: ['Use Glass on Lasers', 'Go South', 'Go West'],
   },
   orat_cave: {
     name: 'Orat Lair',
-    image: '/images/kerona.jpg',
+    image: '/images/orat_cave.jpg',
     description: 'A deep cave smelling of brimstone. The terrifying, green Orat beast stands in the center, growling menacingly. A narrow path leads east.',
     exits: { north: 'caves', east: 'alien_chamber' },
     actions: ['Throw Dehydrated Water', 'Get Hide', 'Go North', 'Go East'],
   },
   alien_chamber: {
     name: 'Alien Command Center',
-    image: '/images/kerona.jpg',
+    image: '/images/alien_chamber.jpg',
     description: 'A massive holographic alien head floats in the room. It demands proof of the Orat\'s death. Behind it sits a functional hover-skimmer.',
     exits: { west: 'orat_cave' },
     actions: ['Give Hide', 'Enter Skimmer', 'Go West'],
@@ -98,21 +98,21 @@ const ROOMS = {
   // --- ACT 3: ULENCE FLATS ---
   ulence_town: {
     name: 'Ulence Flats Speeder Lot',
-    image: '/images/ulence.jpg',
+    image: '/images/ulence_bar.jpg',
     description: 'You park your skimmer in Ulence Flats. A local junk dealer approaches you, eyeing your speeder. North is the Monolith Bar, east is Tiny\'s Ship Shop.',
     exits: { north: 'ulence_bar', east: 'ulence_shop' },
     actions: ['Talk Dealer', 'Sell Skimmer', 'Go North', 'Go East'],
   },
   ulence_bar: {
     name: 'The Monolith Bar',
-    image: '/images/ulence.jpg',
+    image: '/images/ulence_bar.jpg',
     description: 'A lively space bar full of bizarre aliens. A glowing slot machine stands in the corner. South leads back to town.',
     exits: { south: 'ulence_town' },
     actions: ['Play Slots', 'Talk Bartender', 'Clean Floor', 'Go South'],
   },
   ulence_shop: {
     name: 'Tiny\'s Ship Shop',
-    image: '/images/ulence.jpg',
+    image: '/images/ulence_shop.jpg',
     description: 'Tiny sells retro spacecraft. A pilot droid is for sale for 50 Buckazoids. A rusty spaceships stands ready for 100 Buckazoids.',
     exits: { west: 'ulence_town' },
     actions: ['Buy Droid', 'Buy Ship', 'Fly to Deltaur', 'Go West'],
@@ -121,25 +121,60 @@ const ROOMS = {
   // --- ACT 4: THE SARIEN CRUISER DELTAUR ---
   deltaur_airlock: {
     name: 'Deltaur Airlock Exterior',
-    image: '/images/deltaur.jpg',
+    image: '/images/deltaur_airlock.jpg',
     description: 'You float in empty space outside the massive Sarien cruiser Deltaur. A maintenance airlock door lies closed in front of you.',
     exits: {},
     actions: ['Use Jetpack', 'Open Airlock', 'Enter Airlock'],
   },
   deltaur_hallway: {
     name: 'Deltaur Hallway',
-    image: '/images/deltaur.jpg',
+    image: '/images/deltaur_hallway.jpg',
     description: 'Inside the hostile Sarien ship. Laser turrets scan the rooms. An open laundry chute sits on the wall. The main generator lies east.',
     exits: { east: 'deltaur_generator' },
     actions: ['Enter Laundry Chute', 'Wear Sarien Disguise', 'Go East'],
   },
   deltaur_generator: {
     name: 'Star Generator Chamber',
-    image: '/images/deltaur.jpg',
+    image: '/images/deltaur_generator.jpg',
     description: 'The core weapon room. The stolen Star Generator glows in the center. An interactive console panel stands nearby. West returns to hallway.',
     exits: { west: 'deltaur_hallway' },
     actions: ['Look Console', 'Insert Cartridge', 'Type Code 6542', 'Enter Escape Shuttle'],
   }
+};
+const ACT_MAPS = {
+  1: [
+    { id: 'archive', label: '🖳 DATA ARCHIVE' },
+    { id: 'hallway_east', label: '░ EAST CORRIDOR' },
+    { id: 'hallway_west', label: '░ WEST CORRIDOR' },
+    { id: 'closet', label: '🚪 BROOM CLOSET' },
+    { id: 'airlock_room', label: '🔒 AIRLOCK DECK' },
+    { id: 'pod_bay', label: '🚀 ESCAPE POD BAY' }
+  ],
+  2: [
+    { id: 'crash_site', label: '💥 CRASH SITE' },
+    { id: 'desert_path', label: '🏜 DESERT CANYON' },
+    { id: 'caves', label: '🕸 LASER CAVES' },
+    { id: 'orat_cave', label: '🦎 ORAT DEN' },
+    { id: 'alien_chamber', label: '👽 ALIEN HQ' }
+  ],
+  3: [
+    { id: 'ulence_town', label: '🛸 SPEEDER LOT' },
+    { id: 'ulence_bar', label: '🍺 MONOLITH BAR' },
+    { id: 'ulence_shop', label: '🤖 TINY\'S SHOP' }
+  ],
+  4: [
+    { id: 'deltaur_airlock', label: '🚀 OUTER AIRLOCK' },
+    { id: 'deltaur_hallway', label: '░ SECURITY HALL' },
+    { id: 'deltaur_generator', label: '☢ GENERATOR CHAMBER' }
+  ]
+};
+
+const getCurrentAct = (room) => {
+  if (['closet', 'hallway_west', 'hallway_east', 'archive', 'airlock_room', 'pod_bay'].includes(room)) return 1;
+  if (['crash_site', 'desert_path', 'caves', 'orat_cave', 'alien_chamber'].includes(room)) return 2;
+  if (['ulence_town', 'ulence_bar', 'ulence_shop'].includes(room)) return 3;
+  if (['deltaur_airlock', 'deltaur_hallway', 'deltaur_generator'].includes(room)) return 4;
+  return 1;
 };
 
 const INITIAL_STATE = {
@@ -961,15 +996,42 @@ export default function App() {
               )}
             </div>
 
-            {/* Graphics Viewport */}
-            <div 
-              className="scene-viewport"
-              style={{ backgroundImage: `url(${ROOMS[state.currentRoom]?.image || ''})` }}
-            >
-              {dangerAlert && <div className="red-alert-overlay"></div>}
-              
-              {/* Roger Wilco Sprite */}
-              <div className={`character-sprite ${isSpinning ? 'walking' : ''}`}></div>
+            {/* Split Viewport Container with Scene & GPS Map */}
+            <div className="viewport-container">
+              {/* Graphics Viewport */}
+              <div 
+                className="scene-viewport"
+                style={{ backgroundImage: `url(${ROOMS[state.currentRoom]?.image || ''})` }}
+              >
+                {dangerAlert && <div className="red-alert-overlay"></div>}
+                
+                {/* Large Roger Wilco Sprite with Custom Face */}
+                <div className={`character-sprite-container ${isSpinning ? 'walking' : ''}`}>
+                  <div className="character-helmet">
+                    <img src="/images/roger_face.png" className="roger-custom-face" alt="Roger Wilco Face" />
+                  </div>
+                  <div className="character-body"></div>
+                </div>
+              </div>
+
+              {/* Vector GPS Minimap */}
+              <div className="minimap-panel">
+                <div className="minimap-title">GPS TRACKER</div>
+                <div className="minimap-list">
+                  {(() => {
+                    const act = getCurrentAct(state.currentRoom);
+                    const mapNodes = ACT_MAPS[act] || [];
+                    return mapNodes.map((node, index) => (
+                      <React.Fragment key={node.id}>
+                        <div className={`minimap-node ${state.currentRoom === node.id ? 'active' : ''}`}>
+                          {node.label}
+                        </div>
+                        {index < mapNodes.length - 1 && <div className="minimap-arrow">▼</div>}
+                      </React.Fragment>
+                    ));
+                  })()}
+                </div>
+              </div>
             </div>
 
             {/* Helper Action Buttons */}
